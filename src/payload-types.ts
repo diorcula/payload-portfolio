@@ -70,7 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
-    posts: Post;
+    work: Work;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -80,7 +80,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    posts: PostsSelect<false> | PostsSelect<true>;
+    work: WorkSelect<false> | WorkSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -168,30 +168,84 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  description: string;
   heroImage?: (number | null) | Media;
   layout?: {
     content?:
-      | {
-          content?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
+      | (
+          | {
+              content?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
                 [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'content';
-        }[]
+              } | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'content';
+            }
+          | {
+              sectionTitle?: string | null;
+              sectionText?: string | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'sectionTitle';
+            }
+          | {
+              text?: string | null;
+              ctabutton?: {
+                ctaLabel?: string | null;
+                ctaLink?: string | null;
+              };
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'cta';
+            }
+          | {
+              servicesfield?:
+                | {
+                    service?: string | null;
+                    serviceImage?: (number | null) | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'services';
+            }
+          | {
+              popylatedBy?: 'collection' | null;
+              ' realtionTo'?: (number | Work)[] | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'workblock';
+            }
+          | {
+              teaserTitle?: string | null;
+              teaserImage?: (number | null) | Media;
+              teaserDescription?: string | null;
+              teaserLink?:
+                | {
+                    ctabutton?: {
+                      ctaLabel?: string | null;
+                      ctaLink?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'teaser';
+            }
+        )[]
       | null;
   };
   publishedAt?: string | null;
@@ -200,33 +254,34 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
+ * via the `definition` "work".
  */
-export interface Post {
+export interface Work {
   id: number;
   title: string;
   slug?: string | null;
+  heroImage?: (number | null) | Media;
   content?:
-    | {
-        content?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'content';
-      }[]
+    | (
+        | {
+            sectionTitle?: string | null;
+            sectionText?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'sectionTitle';
+          }
+        | {
+            galleryImage?:
+              | {
+                  galleryFieldImage?: (number | Media)[] | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+      )[]
     | null;
   publishedAt?: string | null;
   updatedAt: string;
@@ -252,8 +307,8 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
-        relationTo: 'posts';
-        value: number | Post;
+        relationTo: 'work';
+        value: number | Work;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -344,7 +399,6 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  description?: T;
   heroImage?: T;
   layout?:
     | T
@@ -359,6 +413,68 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
+              sectionTitle?:
+                | T
+                | {
+                    sectionTitle?: T;
+                    sectionText?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              cta?:
+                | T
+                | {
+                    text?: T;
+                    ctabutton?:
+                      | T
+                      | {
+                          ctaLabel?: T;
+                          ctaLink?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              services?:
+                | T
+                | {
+                    servicesfield?:
+                      | T
+                      | {
+                          service?: T;
+                          serviceImage?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              workblock?:
+                | T
+                | {
+                    popylatedBy?: T;
+                    ' realtionTo'?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              teaser?:
+                | T
+                | {
+                    teaserTitle?: T;
+                    teaserImage?: T;
+                    teaserDescription?: T;
+                    teaserLink?:
+                      | T
+                      | {
+                          ctabutton?:
+                            | T
+                            | {
+                                ctaLabel?: T;
+                                ctaLink?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
             };
       };
   publishedAt?: T;
@@ -367,18 +483,32 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
+ * via the `definition` "work_select".
  */
-export interface PostsSelect<T extends boolean = true> {
+export interface WorkSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  heroImage?: T;
   content?:
     | T
     | {
-        content?:
+        sectionTitle?:
           | T
           | {
-              content?: T;
+              sectionTitle?: T;
+              sectionText?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              galleryImage?:
+                | T
+                | {
+                    galleryFieldImage?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

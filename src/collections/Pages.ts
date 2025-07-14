@@ -1,5 +1,10 @@
 import { Content } from '@/blocks/Content'
+import { CallToAction } from '@/blocks/CallToAction'
+import { SectionTitle } from '@/blocks/SectionTitle'
 import { CollectionConfig } from 'payload'
+import { Services } from '@/blocks/Services'
+import { WorkBlock } from '@/blocks/WorkBlock'
+import { Teaser } from '@/blocks/Teaser'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -32,13 +37,6 @@ export const Pages: CollectionConfig = {
               required: true,
             },
             {
-              name: 'description',
-              label: 'Description',
-              type: 'textarea',
-              required: true,
-            },
-
-            {
               name: 'heroImage',
               label: 'Hero Image',
               type: 'relationship',
@@ -53,7 +51,7 @@ export const Pages: CollectionConfig = {
             {
               name: 'content',
               type: 'blocks',
-              blocks: [Content],
+              blocks: [Content, SectionTitle, CallToAction, Services, WorkBlock, Teaser],
             },
           ],
         },

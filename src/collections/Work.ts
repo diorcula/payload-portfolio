@@ -1,8 +1,9 @@
-import { Content } from '@/blocks/Content'
+import { Gallery } from '@/blocks/Gallery'
+import { SectionTitle } from '@/blocks/SectionTitle'
 import { CollectionConfig } from 'payload'
 
-export const Posts: CollectionConfig = {
-  slug: 'posts',
+export const Work: CollectionConfig = {
+  slug: 'work',
 
   admin: {
     useAsTitle: 'title',
@@ -25,10 +26,16 @@ export const Posts: CollectionConfig = {
       label: 'Slug',
     },
     {
+      name: 'heroImage',
+      label: 'Hero Image',
+      type: 'relationship',
+      relationTo: 'media',
+    },
+    {
       name: 'content',
       label: 'Content',
       type: 'blocks',
-      blocks: [Content],
+      blocks: [SectionTitle, Gallery],
     },
 
     {

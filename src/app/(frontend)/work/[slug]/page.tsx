@@ -3,14 +3,14 @@ import config from '@payload-config'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await getPostBySlug(slug)
+  const work = await getPostBySlug(slug)
 
   return (
     <>
       <main>
         <div className="container">
-          <h1> {post.title} </h1>
-          <pre>{JSON.stringify(post, null, 2)}</pre>
+          <h1> {work.title} </h1>
+          <pre>{JSON.stringify(work, null, 2)}</pre>
         </div>
       </main>
     </>
@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 export async function generateStaticParams() {
   const payload = await getPayload({ config })
   const pageQueryResult = await payload.find({
-    collection: 'posts',
+    collection: 'work',
     select: {
       slug: true,
     },
@@ -38,7 +38,7 @@ export async function generateStaticParams() {
 export async function getPostBySlug(slug: string) {
   const payload = await getPayload({ config })
   const pageQueryResult = await payload.find({
-    collection: 'posts',
+    collection: 'work',
     where: {
       slug: {
         equals: slug,
