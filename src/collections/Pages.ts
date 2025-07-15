@@ -15,48 +15,34 @@ export const Pages: CollectionConfig = {
 
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'Meta',
-          fields: [
-            {
-              name: 'title',
-              label: 'Title',
-              type: 'text',
-              required: true,
-            },
-            {
-              name: 'slug', //unique identifier for
-              type: 'text',
-              admin: {
-                position: 'sidebar',
-              },
-              index: true,
-              label: 'Slug',
-              required: true,
-            },
-            {
-              name: 'heroImage',
-              label: 'Hero Image',
-              type: 'relationship',
-              relationTo: 'media',
-            },
-          ],
-        },
-        {
-          name: 'layout',
-          label: 'Layout',
-          fields: [
-            {
-              name: 'content',
-              type: 'blocks',
-              blocks: [Content, SectionTitle, CallToAction, Services, WorkBlock, Teaser],
-            },
-          ],
-        },
-      ],
+      name: 'title',
+      label: 'Title',
+      type: 'text',
+      required: true,
     },
+    {
+      name: 'slug',
+      type: 'text',
+      index: true,
+      label: 'Slug',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'heroImage',
+      label: 'Hero Image',
+      type: 'relationship',
+      relationTo: 'media',
+    },
+
+    {
+      name: 'content',
+      type: 'blocks',
+      blocks: [Content, SectionTitle, CallToAction, Services, WorkBlock, Teaser],
+    },
+
     {
       name: 'publishedAt',
       type: 'date',

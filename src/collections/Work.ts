@@ -19,11 +19,11 @@ export const Work: CollectionConfig = {
     {
       name: 'slug',
       type: 'text',
+      index: true,
+      label: 'Slug',
       admin: {
         position: 'sidebar',
       },
-      index: true,
-      label: 'Slug',
     },
     {
       name: 'heroImage',

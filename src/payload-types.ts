@@ -169,85 +169,83 @@ export interface Page {
   title: string;
   slug: string;
   heroImage?: (number | null) | Media;
-  layout?: {
-    content?:
-      | (
-          | {
-              content?: {
-                root: {
+  content?:
+    | (
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
                   type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
                   version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'content';
-            }
-          | {
-              sectionTitle?: string | null;
-              sectionText?: string | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'sectionTitle';
-            }
-          | {
-              text?: string | null;
-              ctabutton?: {
-                ctaLabel?: string | null;
-                ctaLink?: string | null;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
               };
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'cta';
-            }
-          | {
-              servicesfield?:
-                | {
-                    service?: string | null;
-                    serviceImage?: (number | null) | Media;
-                    id?: string | null;
-                  }[]
-                | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'services';
-            }
-          | {
-              popylatedBy?: 'collection' | null;
-              ' realtionTo'?: (number | Work)[] | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'workblock';
-            }
-          | {
-              teaserTitle?: string | null;
-              teaserImage?: (number | null) | Media;
-              teaserDescription?: string | null;
-              teaserLink?:
-                | {
-                    ctabutton?: {
-                      ctaLabel?: string | null;
-                      ctaLink?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'teaser';
-            }
-        )[]
-      | null;
-  };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'content';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionText?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'sectionTitle';
+          }
+        | {
+            text?: string | null;
+            ctabutton?: {
+              ctaLabel?: string | null;
+              ctaLink?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            servicesfield?:
+              | {
+                  service?: string | null;
+                  serviceImage?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'services';
+          }
+        | {
+            popylatedBy?: 'collection' | null;
+            ' realtionTo'?: (number | Work)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'workblock';
+          }
+        | {
+            teaserTitle?: string | null;
+            teaserImage?: (number | null) | Media;
+            teaserDescription?: string | null;
+            teaserLink?:
+              | {
+                  ctabutton?: {
+                    ctaLabel?: string | null;
+                    ctaLink?: string | null;
+                  };
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'teaser';
+          }
+      )[]
+    | null;
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -400,31 +398,67 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   heroImage?: T;
-  layout?:
+  content?:
     | T
     | {
         content?:
           | T
           | {
-              content?:
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        sectionTitle?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionText?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              text?: T;
+              ctabutton?:
                 | T
                 | {
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
+                    ctaLabel?: T;
+                    ctaLink?: T;
                   };
-              sectionTitle?:
+              id?: T;
+              blockName?: T;
+            };
+        services?:
+          | T
+          | {
+              servicesfield?:
                 | T
                 | {
-                    sectionTitle?: T;
-                    sectionText?: T;
+                    service?: T;
+                    serviceImage?: T;
                     id?: T;
-                    blockName?: T;
                   };
-              cta?:
+              id?: T;
+              blockName?: T;
+            };
+        workblock?:
+          | T
+          | {
+              popylatedBy?: T;
+              ' realtionTo'?: T;
+              id?: T;
+              blockName?: T;
+            };
+        teaser?:
+          | T
+          | {
+              teaserTitle?: T;
+              teaserImage?: T;
+              teaserDescription?: T;
+              teaserLink?:
                 | T
                 | {
-                    text?: T;
                     ctabutton?:
                       | T
                       | {
@@ -432,49 +466,9 @@ export interface PagesSelect<T extends boolean = true> {
                           ctaLink?: T;
                         };
                     id?: T;
-                    blockName?: T;
                   };
-              services?:
-                | T
-                | {
-                    servicesfield?:
-                      | T
-                      | {
-                          service?: T;
-                          serviceImage?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              workblock?:
-                | T
-                | {
-                    popylatedBy?: T;
-                    ' realtionTo'?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              teaser?:
-                | T
-                | {
-                    teaserTitle?: T;
-                    teaserImage?: T;
-                    teaserDescription?: T;
-                    teaserLink?:
-                      | T
-                      | {
-                          ctabutton?:
-                            | T
-                            | {
-                                ctaLabel?: T;
-                                ctaLink?: T;
-                              };
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
+              id?: T;
+              blockName?: T;
             };
       };
   publishedAt?: T;

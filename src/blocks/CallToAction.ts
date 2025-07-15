@@ -1,5 +1,15 @@
 import { Block } from 'payload'
-import { CTAButton } from '../fields/CTAButton'
+import type { Field } from 'payload'
+
+export const CTAButton: Field = {
+  name: 'ctabutton',
+  label: 'Button',
+  type: 'group',
+  fields: [
+    { name: 'ctaLabel', type: 'text' },
+    { name: 'ctaLink', type: 'text' },
+  ],
+}
 
 export const CallToAction: Block = {
   slug: 'cta',
