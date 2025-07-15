@@ -193,13 +193,41 @@ export interface Page {
           }
         | {
             sectionTitle?: string | null;
-            sectionText?: string | null;
+            sectionText?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'sectionTitle';
           }
         | {
-            text?: string | null;
+            text?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             ctabutton: {
               link: Link;
             };
@@ -220,8 +248,8 @@ export interface Page {
             blockType: 'services';
           }
         | {
-            popylatedBy?: 'collection' | null;
-            ' realtionTo'?: (number | Work)[] | null;
+            populatedBy?: 'collection' | null;
+            ' relationToDocument'?: (number | Work)[] | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'workblock';
@@ -229,7 +257,21 @@ export interface Page {
         | {
             teaserTitle?: string | null;
             teaserImage?: (number | null) | Media;
-            teaserDescription?: string | null;
+            teaserDescription?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             teaserLink?:
               | {
                   ctabutton: {
@@ -281,7 +323,21 @@ export interface Work {
     | (
         | {
             sectionTitle?: string | null;
-            sectionText?: string | null;
+            sectionText?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'sectionTitle';
@@ -462,8 +518,8 @@ export interface PagesSelect<T extends boolean = true> {
         workblock?:
           | T
           | {
-              popylatedBy?: T;
-              ' realtionTo'?: T;
+              populatedBy?: T;
+              ' relationToDocument'?: T;
               id?: T;
               blockName?: T;
             };

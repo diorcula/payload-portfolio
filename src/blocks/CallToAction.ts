@@ -19,7 +19,7 @@ export const CallToAction: Block = {
   fields: [
     {
       name: 'text',
-      type: 'textarea',
+      type: 'richText',
     },
     CTAButton,
   ],

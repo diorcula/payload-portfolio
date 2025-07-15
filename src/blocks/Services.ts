@@ -6,7 +6,7 @@ export const ServicesField: Field = {
   type: 'array',
   fields: [
     {
-      label: 'Service',
+      label: 'Item',
       name: 'service',
       type: 'text',
     },

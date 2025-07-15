@@ -5,7 +5,7 @@ export const WorkBlock: Block = {
 
   fields: [
     {
-      name: 'popylatedBy',
+      name: 'populatedBy',
       type: 'select',
       options: [
         {
@@ -15,10 +15,10 @@ export const WorkBlock: Block = {
       ],
     },
     {
-      name: ' realtionTo',
+      name: ' relationToDocument',
       type: 'relationship',
       relationTo: 'work',
-      admin: { condition: (_, siblingData) => siblingData.popylatedBy === 'collection' },
+      admin: { condition: (_, siblingData) => siblingData.populatedBy === 'collection' },
       label: 'Works to show',
       hasMany: true,
     },

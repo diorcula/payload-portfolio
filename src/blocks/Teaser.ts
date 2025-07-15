@@ -19,7 +19,7 @@ export const Teaser: Block = {
     {
       name: 'teaserDescription',
       label: 'Teaser Description',
-      type: 'textarea',
+      type: 'richText',
     },
     {
       name: 'teaserLink',

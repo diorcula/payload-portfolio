@@ -10,7 +10,7 @@ export const SectionTitle: Block = {
     },
     {
       name: 'sectionText',
-      type: 'textarea',
+      type: 'richText',
     },
   ],
 }

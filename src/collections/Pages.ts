@@ -33,8 +33,11 @@ export const Pages: CollectionConfig = {
     {
       name: 'heroImage',
       label: 'Hero Image',
-      type: 'relationship',
+      type: 'upload',
       relationTo: 'media',
+      admin: {
+        position: 'sidebar',
+      },
     },
 
     {
