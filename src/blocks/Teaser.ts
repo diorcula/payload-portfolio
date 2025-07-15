@@ -1,4 +1,4 @@
-import { CTAButton } from '@/fields/CTAButton'
+import { CTAButton } from '@/blocks/CallToAction'
 import { Block } from 'payload'
 
 export const Teaser: Block = {

@@ -200,9 +200,8 @@ export interface Page {
           }
         | {
             text?: string | null;
-            ctabutton?: {
-              ctaLabel?: string | null;
-              ctaLink?: string | null;
+            ctabutton: {
+              link: Link;
             };
             id?: string | null;
             blockName?: string | null;
@@ -233,9 +232,8 @@ export interface Page {
             teaserDescription?: string | null;
             teaserLink?:
               | {
-                  ctabutton?: {
-                    ctaLabel?: string | null;
-                    ctaLink?: string | null;
+                  ctabutton: {
+                    link: Link;
                   };
                   id?: string | null;
                 }[]
@@ -249,6 +247,26 @@ export interface Page {
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Link".
+ */
+export interface Link {
+  type: 'internal_link' | 'custom_url';
+  style?: 'link' | null;
+  reference?:
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'work';
+        value: number | Work;
+      } | null);
+  url?: string | null;
+  newTab?: boolean | null;
+  text: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -423,8 +441,7 @@ export interface PagesSelect<T extends boolean = true> {
               ctabutton?:
                 | T
                 | {
-                    ctaLabel?: T;
-                    ctaLink?: T;
+                    link?: T | LinkSelect<T>;
                   };
               id?: T;
               blockName?: T;
@@ -462,8 +479,7 @@ export interface PagesSelect<T extends boolean = true> {
                     ctabutton?:
                       | T
                       | {
-                          ctaLabel?: T;
-                          ctaLink?: T;
+                          link?: T | LinkSelect<T>;
                         };
                     id?: T;
                   };
@@ -474,6 +490,18 @@ export interface PagesSelect<T extends boolean = true> {
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Link_select".
+ */
+export interface LinkSelect<T extends boolean = true> {
+  type?: T;
+  style?: T;
+  reference?: T;
+  url?: T;
+  newTab?: T;
+  text?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
