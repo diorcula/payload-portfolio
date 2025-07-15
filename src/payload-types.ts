@@ -236,7 +236,7 @@ export interface Page {
             blockType: 'cta';
           }
         | {
-            servicesfield?:
+            items?:
               | {
                   service?: string | null;
                   serviceImage?: (number | null) | Media;
@@ -500,7 +500,7 @@ export interface PagesSelect<T extends boolean = true> {
         services?:
           | T
           | {
-              servicesfield?:
+              items?:
                 | T
                 | {
                     service?: T;
