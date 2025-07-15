@@ -343,12 +343,7 @@ export interface Work {
             blockType: 'sectionTitle';
           }
         | {
-            galleryImage?:
-              | {
-                  galleryFieldImage?: (number | Media)[] | null;
-                  id?: string | null;
-                }[]
-              | null;
+            galleryFieldImage?: (number | Media)[] | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'gallery';
@@ -581,12 +576,7 @@ export interface WorkSelect<T extends boolean = true> {
         gallery?:
           | T
           | {
-              galleryImage?:
-                | T
-                | {
-                    galleryFieldImage?: T;
-                    id?: T;
-                  };
+              galleryFieldImage?: T;
               id?: T;
               blockName?: T;
             };
