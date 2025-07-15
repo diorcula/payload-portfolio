@@ -254,36 +254,6 @@ export interface Page {
             blockName?: string | null;
             blockType: 'workblock';
           }
-        | {
-            teaserTitle?: string | null;
-            teaserImage?: (number | null) | Media;
-            teaserDescription?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            teaserLink?:
-              | {
-                  ctabutton: {
-                    link: Link;
-                  };
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'teaser';
-          }
       )[]
     | null;
   publishedAt?: string | null;
@@ -515,25 +485,6 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               populatedBy?: T;
               ' relationToDocument'?: T;
-              id?: T;
-              blockName?: T;
-            };
-        teaser?:
-          | T
-          | {
-              teaserTitle?: T;
-              teaserImage?: T;
-              teaserDescription?: T;
-              teaserLink?:
-                | T
-                | {
-                    ctabutton?:
-                      | T
-                      | {
-                          link?: T | LinkSelect<T>;
-                        };
-                    id?: T;
-                  };
               id?: T;
               blockName?: T;
             };
