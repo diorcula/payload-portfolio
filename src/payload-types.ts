@@ -293,7 +293,7 @@ export interface Work {
   heroImage?: (number | null) | Media;
   category?: (number | Category)[] | null;
   excerpt: string;
-  features?: string | null;
+  features?: string[] | null;
   linkToWebsite?: string | null;
   content?:
     | (

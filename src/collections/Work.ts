@@ -60,6 +60,7 @@ export const Work: CollectionConfig = {
       name: 'features',
       label: 'Features',
       type: 'text',
+      hasMany: true,
       admin: {
         position: 'sidebar',
       },
