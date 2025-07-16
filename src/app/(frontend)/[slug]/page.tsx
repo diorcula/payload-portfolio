@@ -1,9 +1,15 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
+import payloadConfig from '@payload-config'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+
+  if (slug === 'home') {
+    //this feels sketchy?
+    redirect('/')
+  }
   const page = await getPageBySlug(slug)
 
   if (!page) {
@@ -27,22 +33,25 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 export async function generateStaticParams() {
   try {
     const payload = await getPayload({ config })
-    const pageQueryResult = await payload.find({
+
+    const pageQueryResults = await payload.find({
       collection: 'pages',
+      where: {
+        _status: {
+          equals: 'published',
+        },
+        type: {
+          equals: 'default',
+        },
+      },
       select: {
         slug: true,
       },
     })
 
-    const params = pageQueryResult.docs
-      .filter((doc) => {
-        return doc.slug !== 'home' //we do not want the home page as it is statically rendered elsewhere
-      })
-      .map(({ slug }) => {
-        return { slug }
-      })
-
-    return params
+    return pageQueryResults.docs.map((doc) => ({
+      slug: doc.slug,
+    }))
   } catch {
     return []
   }
