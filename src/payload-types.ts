@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     pages: Page;
     work: Work;
+    category: Category;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     work: WorkSelect<false> | WorkSelect<true>;
+    category: CategorySelect<false> | CategorySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -289,7 +291,9 @@ export interface Work {
   title: string;
   slug: string;
   heroImage?: (number | null) | Media;
+  category?: (number | Category)[] | null;
   excerpt: string;
+  features?: string | null;
   linkToWebsite?: string | null;
   content?:
     | (
@@ -320,9 +324,40 @@ export interface Work {
             blockName?: string | null;
             blockType: 'gallery';
           }
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'content';
+          }
       )[]
     | null;
   publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "category".
+ */
+export interface Category {
+  id: number;
+  title: string;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -348,6 +383,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'work';
         value: number | Work;
+      } | null)
+    | ({
+        relationTo: 'category';
+        value: number | Category;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -515,7 +554,9 @@ export interface WorkSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   heroImage?: T;
+  category?: T;
   excerpt?: T;
+  features?: T;
   linkToWebsite?: T;
   content?:
     | T
@@ -535,8 +576,25 @@ export interface WorkSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        content?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "category_select".
+ */
+export interface CategorySelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

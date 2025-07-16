@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Work } from './collections/Work'
+import { Category } from './collections/Category'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,7 +27,7 @@ export default buildConfig({
     //   collections: ['pages', 'posts'],
     // },
   },
-  collections: [Users, Media, Pages, Work],
+  collections: [Users, Media, Pages, Work, Category],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

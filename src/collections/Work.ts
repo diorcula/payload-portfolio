@@ -1,6 +1,8 @@
 import { Gallery } from '@/blocks/Gallery'
 import { SectionTitle } from '@/blocks/SectionTitle'
 import { CollectionConfig } from 'payload'
+import { Category } from './Category'
+import { Content } from '@/blocks/Content'
 
 export const Work: CollectionConfig = {
   slug: 'work',
@@ -36,10 +38,28 @@ export const Work: CollectionConfig = {
       },
     },
     {
+      name: 'category',
+      label: 'Category',
+      type: 'relationship',
+      relationTo: 'category',
+      hasMany: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'excerpt',
       label: 'Excerpt',
       type: 'textarea',
       required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'features',
+      label: 'Features',
+      type: 'text',
       admin: {
         position: 'sidebar',
       },
@@ -56,9 +76,8 @@ export const Work: CollectionConfig = {
       name: 'content',
       label: 'Content',
       type: 'blocks',
-      blocks: [SectionTitle, Gallery],
+      blocks: [SectionTitle, Gallery, Content],
     },
-
     {
       name: 'publishedAt',
       type: 'date',
