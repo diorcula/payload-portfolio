@@ -168,6 +168,7 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
+  type: 'content' | 'homepage';
   heroImage?: (number | null) | Media;
   content?:
     | (
@@ -248,7 +249,6 @@ export interface Page {
             blockType: 'services';
           }
         | {
-            populatedBy?: 'collection' | null;
             ' relationToDocument'?: (number | Work)[] | null;
             id?: string | null;
             blockName?: string | null;
@@ -287,8 +287,10 @@ export interface Link {
 export interface Work {
   id: number;
   title: string;
-  slug?: string | null;
+  slug: string;
   heroImage?: (number | null) | Media;
+  excerpt: string;
+  linkToWebsite?: string | null;
   content?:
     | (
         | {
@@ -436,6 +438,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  type?: T;
   heroImage?: T;
   content?:
     | T
@@ -483,7 +486,6 @@ export interface PagesSelect<T extends boolean = true> {
         workblock?:
           | T
           | {
-              populatedBy?: T;
               ' relationToDocument'?: T;
               id?: T;
               blockName?: T;
@@ -513,6 +515,8 @@ export interface WorkSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   heroImage?: T;
+  excerpt?: T;
+  linkToWebsite?: T;
   content?:
     | T
     | {

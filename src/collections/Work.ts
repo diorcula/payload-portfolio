@@ -21,6 +21,7 @@ export const Work: CollectionConfig = {
       type: 'text',
       index: true,
       label: 'Slug',
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -30,6 +31,23 @@ export const Work: CollectionConfig = {
       label: 'Hero Image',
       type: 'upload',
       relationTo: 'media',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'excerpt',
+      label: 'Excerpt',
+      type: 'textarea',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'linkToWebsite',
+      label: 'Link',
+      type: 'text',
       admin: {
         position: 'sidebar',
       },
