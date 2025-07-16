@@ -1,9 +1,9 @@
-import { Content } from '@/blocks/Content'
-import { CallToAction } from '@/blocks/CallToAction'
-import { SectionTitle } from '@/blocks/SectionTitle'
+import { Content } from '@/blocks/Content/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { SectionTitle } from '@/blocks/SectionTitle/config'
 import { CollectionConfig, Payload } from 'payload'
-import { Services } from '@/blocks/Services'
-import { WorkBlock } from '@/blocks/WorkBlock'
+import { Services } from '@/blocks/Services/config'
+import { WorkBlock } from '@/blocks/Work/config'
 
 const uniquePageTypes = ['homepage']
 
@@ -93,7 +93,7 @@ export const Pages: CollectionConfig = {
     },
 
     {
-      name: 'content',
+      name: 'blocks',
       type: 'blocks',
       blocks: [Content, SectionTitle, CallToAction, Services, WorkBlock],
     },

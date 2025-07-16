@@ -1,8 +1,7 @@
-import { Gallery } from '@/blocks/Gallery'
-import { SectionTitle } from '@/blocks/SectionTitle'
+import { Gallery } from '@/blocks/Gallery/config'
+import { SectionTitle } from '@/blocks/SectionTitle/config'
 import { CollectionConfig } from 'payload'
-import { Category } from './Category'
-import { Content } from '@/blocks/Content'
+import { Content } from '@/blocks/Content/config'
 
 export const Work: CollectionConfig = {
   slug: 'work',

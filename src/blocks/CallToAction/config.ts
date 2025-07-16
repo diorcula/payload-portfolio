@@ -15,6 +15,7 @@ export const CTAButton: Field = {
 
 export const CallToAction: Block = {
   slug: 'cta',
+  interfaceName: 'CallToActionBlock',
 
   fields: [
     {

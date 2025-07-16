@@ -16,10 +16,7 @@ export default async function HomePage() {
       <main>
         <div className="container">
           <h1> {page.title} </h1>
-          <h2 style={{ color: 'lightgreen' }}>
-            -----{'>'} dit is root {'<'}----
-          </h2>
-          {/* <pre>{JSON.stringify(page, null, 2)}</pre> */}
+          <pre>{JSON.stringify(page, null, 2)}</pre>
         </div>
       </main>
     </>

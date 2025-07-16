@@ -2,6 +2,7 @@ import { Block } from 'payload'
 
 export const SectionTitle: Block = {
   slug: 'sectionTitle',
+  interfaceName: 'SectionTitleBlock',
 
   fields: [
     {

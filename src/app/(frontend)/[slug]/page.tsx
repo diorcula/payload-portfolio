@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { notFound, redirect } from 'next/navigation'
-import payloadConfig from '@payload-config'
+import RenderBlocks from '@/app/lib/RenderBlocks'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -21,7 +21,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {page.title} </h1>
-          <pre>{JSON.stringify(page, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(page, null, 2)}</pre> */}
+          <RenderBlocks blocks={page.blocks} />
         </div>
       </main>
     </>
@@ -41,7 +42,7 @@ export async function generateStaticParams() {
           equals: 'published',
         },
         type: {
-          equals: 'default',
+          equals: 'default', //check dit in backend?
         },
       },
       select: {

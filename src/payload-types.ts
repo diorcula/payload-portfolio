@@ -172,72 +172,11 @@ export interface Page {
   slug: string;
   type: 'content' | 'homepage';
   heroImage?: (number | null) | Media;
-  content?:
+  blocks?:
     | (
-        | {
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'content';
-          }
-        | {
-            sectionTitle?: string | null;
-            sectionText?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'sectionTitle';
-          }
-        | {
-            text?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            ctabutton: {
-              link: Link;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'cta';
-          }
+        | ContentBlock
+        | SectionTitleBlock
+        | CallToActionBlock
         | {
             items?:
               | {
@@ -261,6 +200,82 @@ export interface Page {
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionTitleBlock".
+ */
+export interface SectionTitleBlock {
+  sectionTitle?: string | null;
+  sectionText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sectionTitle';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  ctabutton: {
+    link: Link;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -297,53 +312,14 @@ export interface Work {
   linkToWebsite?: string | null;
   content?:
     | (
-        | {
-            sectionTitle?: string | null;
-            sectionText?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'sectionTitle';
-          }
+        | SectionTitleBlock
         | {
             galleryFieldImage?: (number | Media)[] | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'gallery';
           }
-        | {
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'content';
-          }
+        | ContentBlock
       )[]
     | null;
   publishedAt?: string | null;
@@ -479,36 +455,12 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   type?: T;
   heroImage?: T;
-  content?:
+  blocks?:
     | T
     | {
-        content?:
-          | T
-          | {
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        sectionTitle?:
-          | T
-          | {
-              sectionTitle?: T;
-              sectionText?: T;
-              id?: T;
-              blockName?: T;
-            };
-        cta?:
-          | T
-          | {
-              text?: T;
-              ctabutton?:
-                | T
-                | {
-                    link?: T | LinkSelect<T>;
-                  };
-              id?: T;
-              blockName?: T;
-            };
+        content?: T | ContentBlockSelect<T>;
+        sectionTitle?: T | SectionTitleBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
         services?:
           | T
           | {
@@ -533,6 +485,39 @@ export interface PagesSelect<T extends boolean = true> {
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock_select".
+ */
+export interface ContentBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionTitleBlock_select".
+ */
+export interface SectionTitleBlockSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  sectionText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock_select".
+ */
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  text?: T;
+  ctabutton?:
+    | T
+    | {
+        link?: T | LinkSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -561,14 +546,7 @@ export interface WorkSelect<T extends boolean = true> {
   content?:
     | T
     | {
-        sectionTitle?:
-          | T
-          | {
-              sectionTitle?: T;
-              sectionText?: T;
-              id?: T;
-              blockName?: T;
-            };
+        sectionTitle?: T | SectionTitleBlockSelect<T>;
         gallery?:
           | T
           | {
@@ -576,13 +554,7 @@ export interface WorkSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        content?:
-          | T
-          | {
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
+        content?: T | ContentBlockSelect<T>;
       };
   publishedAt?: T;
   updatedAt?: T;
