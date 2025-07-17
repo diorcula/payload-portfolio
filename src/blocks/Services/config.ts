@@ -2,6 +2,8 @@ import { Block } from 'payload'
 
 export const Services: Block = {
   slug: 'services',
+  interfaceName: 'ServicesBlock',
+
   fields: [
     {
       name: 'items',

@@ -172,31 +172,7 @@ export interface Page {
   slug: string;
   type: 'content' | 'homepage';
   heroImage?: (number | null) | Media;
-  blocks?:
-    | (
-        | ContentBlock
-        | SectionTitleBlock
-        | CallToActionBlock
-        | {
-            items?:
-              | {
-                  service?: string | null;
-                  serviceImage?: (number | null) | Media;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'services';
-          }
-        | {
-            ' relationToDocument'?: (number | Work)[] | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'workblock';
-          }
-      )[]
-    | null;
+  blocks?: (ContentBlock | SectionTitleBlock | CallToActionBlock | ServicesBlock | WorkBLock)[] | null;
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -310,18 +286,7 @@ export interface Work {
   excerpt: string;
   features?: string[] | null;
   linkToWebsite?: string | null;
-  content?:
-    | (
-        | SectionTitleBlock
-        | {
-            galleryFieldImage?: (number | Media)[] | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'gallery';
-          }
-        | ContentBlock
-      )[]
-    | null;
+  content?: (SectionTitleBlock | GalleryBlock | ContentBlock)[] | null;
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -336,6 +301,42 @@ export interface Category {
   slug: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  galleryFieldImage?: (number | Media)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesBlock".
+ */
+export interface ServicesBlock {
+  items?:
+    | {
+        service?: string | null;
+        serviceImage?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'services';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WorkBLock".
+ */
+export interface WorkBLock {
+  ' relationToDocument'?: (number | Work)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'workblock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -461,26 +462,8 @@ export interface PagesSelect<T extends boolean = true> {
         content?: T | ContentBlockSelect<T>;
         sectionTitle?: T | SectionTitleBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
-        services?:
-          | T
-          | {
-              items?:
-                | T
-                | {
-                    service?: T;
-                    serviceImage?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        workblock?:
-          | T
-          | {
-              ' relationToDocument'?: T;
-              id?: T;
-              blockName?: T;
-            };
+        services?: T | ServicesBlockSelect<T>;
+        workblock?: T | WorkBLockSelect<T>;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -533,6 +516,30 @@ export interface LinkSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesBlock_select".
+ */
+export interface ServicesBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        service?: T;
+        serviceImage?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WorkBLock_select".
+ */
+export interface WorkBLockSelect<T extends boolean = true> {
+  ' relationToDocument'?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "work_select".
  */
 export interface WorkSelect<T extends boolean = true> {
@@ -547,18 +554,21 @@ export interface WorkSelect<T extends boolean = true> {
     | T
     | {
         sectionTitle?: T | SectionTitleBlockSelect<T>;
-        gallery?:
-          | T
-          | {
-              galleryFieldImage?: T;
-              id?: T;
-              blockName?: T;
-            };
+        gallery?: T | GalleryBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
       };
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  galleryFieldImage?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

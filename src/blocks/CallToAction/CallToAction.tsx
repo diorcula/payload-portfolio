@@ -3,7 +3,8 @@ import RichText from '@/app/lib/RichText'
 import Link from 'next/link'
 type Props = CallToActionBlockProps
 
-export function CallToActiontBLock(props: Props) {
+//how to query the document?
+export function CallToActionBLock(props: Props) {
   if (props.ctabutton.link.url) {
     return (
       <>

@@ -2,6 +2,7 @@ import { Block } from 'payload'
 
 export const WorkBlock: Block = {
   slug: 'workblock',
+  interfaceName: 'WorkBLock',
 
   fields: [
     {

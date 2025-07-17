@@ -21,7 +21,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {page.title} </h1>
-          {/* <pre>{JSON.stringify(page, null, 2)}</pre> */}
           <RenderBlocks blocks={page.blocks} />
         </div>
       </main>
