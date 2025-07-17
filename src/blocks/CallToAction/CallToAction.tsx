@@ -1,7 +1,7 @@
 import type { CallToActionBlock as CallToActionBlockProps } from '@/payload-types'
 import RichText from '@/app/lib/RichText'
 import Link from 'next/link'
-// import { Button } from '@payloadcms/ui'
+import { Button } from '@payloadcms/ui'
 
 type Props = CallToActionBlockProps
 
@@ -30,16 +30,7 @@ export function CallToActionBLock(props: Props) {
       >
         <RichText data={props.text} />
         <Link href={props.ctabutton.link.url}>
-          <button
-            style={{
-              margin: '10px 10px',
-              padding: '20px 20px',
-              backgroundColor: 'blue',
-              color: '#ffff',
-            }}
-          >
-            {props.ctabutton.link.text}
-          </button>
+          <Button>{props.ctabutton.link.text}</Button>
         </Link>
       </div>
     )
@@ -57,16 +48,7 @@ export function CallToActionBLock(props: Props) {
         >
           <RichText data={props.text} />
           <Link href={link}>
-            <button
-              style={{
-                margin: '10px 10px',
-                padding: '20px 20px',
-                backgroundColor: 'blue',
-                color: '#ffff',
-              }}
-            >
-              {props.ctabutton.link.text}
-            </button>
+            <Button>{props.ctabutton.link.text}</Button>
           </Link>
         </div>
       )
