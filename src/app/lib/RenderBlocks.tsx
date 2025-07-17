@@ -35,12 +35,12 @@ function getBlock(block: Blocks) {
       return <SectionTitleBlock key={block.id} {...block} />
     case 'cta':
       return <CallToActionBLock key={block.id} {...block} />
-    case 'gallery':
-      return <GalleryBlock key={block.id} {...block} />
-    case 'services':
-      return <ServicesBlock key={block.id} {...block} />
-    case 'workblock':
-      return <WorkBlock key={block.id} {...block} />
+    // case 'gallery':
+    //   return <GalleryBlock key={block.id} {...block} />
+    // case 'services':
+    //   return <ServicesBlock key={block.id} {...block} />
+    // case 'workblock':
+    //   return <WorkBlock key={block.id} {...block} />
     default:
       return null
   }
