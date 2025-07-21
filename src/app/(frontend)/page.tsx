@@ -4,6 +4,7 @@ import config from '@/payload.config'
 import './styles.css'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import { getTeaser } from '../components/Teaser'
 
 export default async function HomePage() {
   const page = await getHomePage()
@@ -17,12 +18,19 @@ export default async function HomePage() {
       <main>
         <div className="container">
           <h1> {page.title} </h1>
-          <Image
-            src={page.heroImage.url}
-            alt={page.heroImage.alt || 'Homepage Hero Image'}
-            width={page.heroImage.width || 600}
-            height={page.heroImage.height || 400}
-          />
+          <div className="homePageHero">
+            <Image
+              src={page.heroImage.url}
+              alt={page.heroImage.alt || 'Homepage Hero Image'}
+              width={page.heroImage.width || 600}
+              height={page.heroImage.height || 400}
+            />
+          </div>
+
+          <div className="teasers">
+            <h1></h1>
+            {getTeaser()}
+          </div>
         </div>
       </main>
     </>

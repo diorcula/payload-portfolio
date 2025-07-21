@@ -39,14 +39,11 @@ export const Pages: CollectionConfig = {
       required: true,
       enumName: 'collection_page_type',
       options: [
-        {
-          value: 'content',
-          label: 'Content',
-        },
-        {
-          value: 'homepage',
-          label: 'Homepage',
-        },
+        { value: 'content', label: 'Content' },
+        { value: 'homepage', label: 'Homepage' },
+        { value: 'workOverview', label: 'Work Overview' },
+        { value: 'about', label: 'About' },
+        { value: 'contact', label: 'Contact' },
       ],
       //@ts-expect-error can't find documentation how to fix this properly
       validate: async (value: string, { req, data }) => {

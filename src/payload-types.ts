@@ -170,7 +170,7 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  type: 'content' | 'homepage';
+  type: 'content' | 'homepage' | 'workOverview' | 'about' | 'contact';
   heroImage?: (number | null) | Media;
   blocks?: (ContentBlock | SectionTitleBlock | CallToActionBlock | ServicesBlock | WorkBLock)[] | null;
   publishedAt?: string | null;

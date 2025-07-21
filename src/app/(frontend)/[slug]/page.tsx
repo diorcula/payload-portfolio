@@ -3,6 +3,7 @@ import config from '@payload-config'
 import { notFound, redirect } from 'next/navigation'
 import RenderBlocks from '@/app/lib/RenderBlocks'
 import Image from 'next/image'
+import { getWorkOverview } from '@/app/components/WorkOverview'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -30,7 +31,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               height={page.heroImage.height || 400}
             />
           </div>
+
           <RenderBlocks blocks={page.blocks} />
+
+          {page.type === 'workOverview' && (
+            <div className="workOverview">
+              <h1>Work Overview</h1>
+              {getWorkOverview()}
+            </div>
+          )}
         </div>
       </main>
     </>
