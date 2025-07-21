@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import RenderBlocks from '@/app/lib/RenderBlocks'
+import Image from 'next/image'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -11,7 +12,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {work.title} </h1>
-          {/* <pre>{JSON.stringify(work, null, 2)}</pre> */}
+          <div className="heroImage">
+            <Image
+              src={work.heroImage.url}
+              alt={work.heroImage.alt || 'Hero Image'}
+              width={work.heroImage.width || 600}
+              height={work.heroImage.height || 400}
+            />
+          </div>
           <RenderBlocks blocks={work.content} />
         </div>
       </main>

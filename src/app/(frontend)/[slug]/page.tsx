@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { notFound, redirect } from 'next/navigation'
 import RenderBlocks from '@/app/lib/RenderBlocks'
+import Image from 'next/image'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -21,6 +22,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {page.title} </h1>
+          <div className="heroImage">
+            <Image
+              src={page.heroImage.url}
+              alt={page.heroImage.alt || 'Hero Image'}
+              width={page.heroImage.width || 600}
+              height={page.heroImage.height || 400}
+            />
+          </div>
           <RenderBlocks blocks={page.blocks} />
         </div>
       </main>

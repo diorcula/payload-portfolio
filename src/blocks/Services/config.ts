@@ -20,6 +20,11 @@ export const Services: Block = {
           type: 'upload',
           relationTo: 'media',
         },
+        {
+          label: 'Description',
+          name: 'serviceDescription',
+          type: 'text',
+        },
       ],
     },
   ],

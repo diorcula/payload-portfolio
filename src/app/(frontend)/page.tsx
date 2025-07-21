@@ -3,6 +3,7 @@ import React from 'react'
 import config from '@/payload.config'
 import './styles.css'
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 
 export default async function HomePage() {
   const page = await getHomePage()
@@ -16,7 +17,12 @@ export default async function HomePage() {
       <main>
         <div className="container">
           <h1> {page.title} </h1>
-          <pre>{JSON.stringify(page, null, 2)}</pre>
+          <Image
+            src={page.heroImage.url}
+            alt={page.heroImage.alt || 'Homepage Hero Image'}
+            width={page.heroImage.width || 600}
+            height={page.heroImage.height || 400}
+          />
         </div>
       </main>
     </>
