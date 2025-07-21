@@ -1,36 +1,24 @@
 import type { GalleryBlock, Media } from '@/payload-types'
-import Image, { type ImageProps } from 'next/image'
+import Image from 'next/image'
 
-type CustomImageProps = Omit<ImageProps, 'src' | 'alt' | 'width' | 'height'>
-
-interface Props extends CustomImageProps {
-  src: Media | number | undefined | null
-}
+interface Props extends GalleryBlock {}
 
 export function GalleryBlock(props: Props) {
-  const image = getPayloadImageObject(props.src)
+  const images = props.galleryFieldImage
 
-  if (!image || !image.url) {
-    return null
-  }
-
+  // this is only rendering the images from the gallery, not the rest of the block (if there is any)
   return (
     <>
-      <Image
-        {...props}
-        src={image.url}
-        alt={image.alt || 'Media Block Image'}
-        width={image.width || 600}
-        height={image.height || 400}
-      />
+      {images?.map((image) => (
+        <div key={image.id} className="galleryImage">
+          <Image
+            src={image.url}
+            alt={image.alt || 'Gallery Block Image'}
+            width={image.width || 600}
+            height={image.height || 400}
+          />
+        </div>
+      ))}
     </>
   )
-}
-
-export function getPayloadImageObject(image: number | Media | null | undefined) {
-  if (!image || typeof image === 'number') {
-    return undefined
-  }
-
-  return image
 }

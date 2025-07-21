@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import RenderBlocks from '@/app/lib/RenderBlocks'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -10,7 +11,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {work.title} </h1>
-          <pre>{JSON.stringify(work, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(work, null, 2)}</pre> */}
+          <RenderBlocks blocks={work.content} />
         </div>
       </main>
     </>
