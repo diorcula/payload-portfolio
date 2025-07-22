@@ -5,15 +5,16 @@ interface Props extends GalleryBlock {}
 
 export function GalleryBlock(props: Props) {
   const images = props.galleryFieldImage
+  const filteredImages = images?.filter((image) => typeof image === 'object' && image !== null)
 
   return (
     <>
       <div className="gallery">
         <h1>Gallery</h1>
-        {images?.map((image) => (
+        {filteredImages?.map((image) => (
           <div key={image.id} className="galleryImage">
             <Image
-              src={image.url}
+              src={image.url || '/media/notfound.jpg'}
               alt={image.alt || 'Gallery Block Image'}
               width={image.width || 600}
               height={image.height || 400}

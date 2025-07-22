@@ -11,7 +11,7 @@ import { SectionTitleBlock } from '@/blocks/SectionTitle/SectionTitle'
 import { CallToActionBLock } from '@/blocks/CallToAction/CallToAction'
 import { GalleryBlock } from '@/blocks/Gallery/Gallery'
 import { ServicesBlock } from '@/blocks/Services/Services'
-import { WorkTeaserBlock } from '@/blocks/WorkTeaser/Work'
+import { WorkTeaserBlock } from '@/blocks/WorkTeaser/WorkTeaser'
 
 interface Props {
   blocks: Blocks[] | null | undefined
