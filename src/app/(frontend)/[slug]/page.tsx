@@ -9,7 +9,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { slug } = await params
 
   if (slug === 'home') {
-    //this feels sketchy?
     redirect('/')
   }
   const page = await getPageBySlug(slug)
@@ -23,13 +22,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {page.title} </h1>
-          <div className="heroImage">
-            <Image
-              src={page.heroImage.url}
-              alt={page.heroImage.alt || 'Hero Image'}
-              width={page.heroImage.width || 600}
-              height={page.heroImage.height || 400}
-            />
+          <div className="workHeroImage">
+            {typeof page.heroImage === 'object' && page.heroImage !== null && (
+              <Image
+                src={page.heroImage.url || 'media/notfound.jpg'}
+                alt={page.heroImage.alt || 'Work Hero Image'}
+                width={page.heroImage.width || 600}
+                height={page.heroImage.height || 400}
+              />
+            )}
           </div>
 
           <RenderBlocks blocks={page.blocks} />

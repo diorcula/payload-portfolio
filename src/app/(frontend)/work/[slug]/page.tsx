@@ -12,13 +12,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <main>
         <div className="container">
           <h1> {work.title} </h1>
-          <div className="heroImage">
-            <Image
-              src={work.heroImage.url}
-              alt={work.heroImage.alt || 'Hero Image'}
-              width={work.heroImage.width || 600}
-              height={work.heroImage.height || 400}
-            />
+          <div className="workHeroImage">
+            {typeof work.heroImage === 'object' && work.heroImage !== null && (
+              <Image
+                src={work.heroImage.url || 'media/notfound.jpg'}
+                alt={work.heroImage.alt || 'Work Hero Image'}
+                width={work.heroImage.width || 600}
+                height={work.heroImage.height || 400}
+              />
+            )}
           </div>
           <RenderBlocks blocks={work.content} />
         </div>

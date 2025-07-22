@@ -18,12 +18,16 @@ export function ServicesBlock(props: Props) {
           <div key={item.id} className="serviceItem">
             <h3>{item.service}</h3>
 
-            <Image
-              src={item.serviceImage.url}
-              alt={item.serviceImage.alt || 'Gallery Block Image'}
-              width={item.serviceImage.width || 600}
-              height={item.serviceImage.height || 400}
-            />
+            <div className="workHeroImage">
+              {typeof item.serviceImage === 'object' && item.serviceImage !== null && (
+                <Image
+                  src={item.serviceImage.url || 'media/notfound.jpg'}
+                  alt={item.serviceImage.alt || 'Work Hero Image'}
+                  width={item.serviceImage.width || 600}
+                  height={item.serviceImage.height || 400}
+                />
+              )}
+            </div>
 
             <p>{item.serviceDescription}</p>
           </div>

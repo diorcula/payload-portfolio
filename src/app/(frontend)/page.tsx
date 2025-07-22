@@ -4,7 +4,6 @@ import config from '@/payload.config'
 import './styles.css'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { getTeaser } from '../components/Teaser'
 import RenderBlocks from '../lib/RenderBlocks'
 
 export default async function HomePage() {
@@ -30,8 +29,7 @@ export default async function HomePage() {
             )}
           </div>
 
-          <div className="teasers">
-            <h1></h1>
+          <div className="content">
             <RenderBlocks blocks={page.blocks} />
           </div>
         </div>
