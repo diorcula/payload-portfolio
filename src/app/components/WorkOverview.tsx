@@ -40,16 +40,14 @@ export async function getWorkOverview() {
           <div className="workExcerpt">{work.excerpt}</div>
 
           <div className="workHeroImage">
-            {typeof work.heroImage === 'object' &&
-              work.heroImage !== null &&
-              'url' in work.heroImage && (
-                <Image
-                  src={work.heroImage.url || 'media/notfound.jpg'}
-                  alt={work.heroImage.alt || 'Work Hero Image'}
-                  width={work.heroImage.width || 600}
-                  height={work.heroImage.height || 400}
-                />
-              )}
+            {typeof work.heroImage === 'object' && work.heroImage !== null && (
+              <Image
+                src={work.heroImage.url || 'media/notfound.jpg'}
+                alt={work.heroImage.alt || 'Work Hero Image'}
+                width={work.heroImage.width || 600}
+                height={work.heroImage.height || 400}
+              />
+            )}
           </div>
         </div>
       ))}

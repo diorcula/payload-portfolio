@@ -20,12 +20,14 @@ export default async function HomePage() {
         <div className="container">
           <h1> {page.title} </h1>
           <div className="homePageHero">
-            <Image
-              src={page.heroImage.url}
-              alt={page.heroImage.alt || 'Homepage Hero Image'}
-              width={page.heroImage.width || 600}
-              height={page.heroImage.height || 400}
-            />
+            {typeof page.heroImage === 'object' && page.heroImage !== null && (
+              <Image
+                src={page.heroImage.url || 'media/notfound.jpg'}
+                alt={page.heroImage.alt || 'Work Hero Image'}
+                width={page.heroImage.width || 600}
+                height={page.heroImage.height || 400}
+              />
+            )}
           </div>
 
           <div className="teasers">
