@@ -4,14 +4,14 @@ import type {
   CallToActionBlock as CallToActionBLockType,
   GalleryBlock as GalleryBlockType,
   ServicesBlock as ServicesBlockType,
-  WorkBLock as WorkBLockType,
+  WorkTeaserBlock as WorkTeaserBlockType,
 } from '@/payload-types'
 import { ContentBLock } from '@/blocks/Content/Content'
 import { SectionTitleBlock } from '@/blocks/SectionTitle/SectionTitle'
 import { CallToActionBLock } from '@/blocks/CallToAction/CallToAction'
 import { GalleryBlock } from '@/blocks/Gallery/Gallery'
 import { ServicesBlock } from '@/blocks/Services/Services'
-import { WorkBlock } from '@/blocks/Work/Work'
+import { WorkTeaserBlock } from '@/blocks/WorkTeaser/Work'
 
 interface Props {
   blocks: Blocks[] | null | undefined
@@ -24,7 +24,7 @@ type Blocks =
   | CallToActionBLockType
   | GalleryBlockType
   | ServicesBlockType
-  | WorkBLockType
+  | WorkTeaserBlockType
 
 // add block components here
 function getBlock(block: Blocks) {
@@ -39,8 +39,8 @@ function getBlock(block: Blocks) {
       return <GalleryBlock key={block.id} {...block} />
     case 'services':
       return <ServicesBlock key={block.id} {...block} />
-    // case 'workblock':
-    //   return <WorkBlock key={block.id} {...block} />
+    case 'workteaserblock':
+      return <WorkTeaserBlock key={block.id} {...block} />
     default:
       return null
   }

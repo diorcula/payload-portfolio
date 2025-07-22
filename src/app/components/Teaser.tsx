@@ -1,8 +1,6 @@
 import { Block, getPayload } from 'payload'
 import config from '@payload-config'
 import Image from 'next/image'
-import RenderBlocks from '../lib/RenderBlocks'
-import { GalleryBlock } from '@/payload-types'
 
 export async function getTeaser() {
   try {
@@ -16,8 +14,6 @@ export async function getTeaser() {
     }
 
     const works = pageQueryResult.docs
-
-    // console.log(works)
 
     return (
       <>

@@ -3,7 +3,7 @@ import { CallToAction } from '@/blocks/CallToAction/config'
 import { SectionTitle } from '@/blocks/SectionTitle/config'
 import { CollectionConfig, Payload } from 'payload'
 import { Services } from '@/blocks/Services/config'
-import { WorkBlock } from '@/blocks/Work/config'
+import { WorkTeaserBlock } from '@/blocks/WorkTeaser/config'
 
 const uniquePageTypes = ['homepage']
 
@@ -92,7 +92,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'blocks',
       type: 'blocks',
-      blocks: [Content, SectionTitle, CallToAction, Services, WorkBlock],
+      blocks: [Content, SectionTitle, CallToAction, Services, WorkTeaserBlock],
     },
 
     {

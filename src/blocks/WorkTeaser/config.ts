@@ -1,8 +1,8 @@
 import { Block } from 'payload'
 
-export const WorkBlock: Block = {
-  slug: 'workblock',
-  interfaceName: 'WorkBLock',
+export const WorkTeaserBlock: Block = {
+  slug: 'workteaserblock',
+  interfaceName: 'WorkTeaserBlock',
 
   fields: [
     {

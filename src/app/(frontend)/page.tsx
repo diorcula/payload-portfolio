@@ -5,6 +5,7 @@ import './styles.css'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { getTeaser } from '../components/Teaser'
+import RenderBlocks from '../lib/RenderBlocks'
 
 export default async function HomePage() {
   const page = await getHomePage()
@@ -29,7 +30,7 @@ export default async function HomePage() {
 
           <div className="teasers">
             <h1></h1>
-            {getTeaser()}
+            <RenderBlocks blocks={page.blocks} />
           </div>
         </div>
       </main>

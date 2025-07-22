@@ -172,7 +172,7 @@ export interface Page {
   slug: string;
   type: 'content' | 'homepage' | 'workOverview' | 'about' | 'contact';
   heroImage?: (number | null) | Media;
-  blocks?: (ContentBlock | SectionTitleBlock | CallToActionBlock | ServicesBlock | WorkBLock)[] | null;
+  blocks?: (ContentBlock | SectionTitleBlock | CallToActionBlock | ServicesBlock | WorkTeaserBlock)[] | null;
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -331,13 +331,13 @@ export interface ServicesBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "WorkBLock".
+ * via the `definition` "WorkTeaserBlock".
  */
-export interface WorkBLock {
+export interface WorkTeaserBlock {
   ' relationToDocument'?: (number | Work)[] | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'workblock';
+  blockType: 'workteaserblock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -464,7 +464,7 @@ export interface PagesSelect<T extends boolean = true> {
         sectionTitle?: T | SectionTitleBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         services?: T | ServicesBlockSelect<T>;
-        workblock?: T | WorkBLockSelect<T>;
+        workteaserblock?: T | WorkTeaserBlockSelect<T>;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -533,9 +533,9 @@ export interface ServicesBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "WorkBLock_select".
+ * via the `definition` "WorkTeaserBlock_select".
  */
-export interface WorkBLockSelect<T extends boolean = true> {
+export interface WorkTeaserBlockSelect<T extends boolean = true> {
   ' relationToDocument'?: T;
   id?: T;
   blockName?: T;
